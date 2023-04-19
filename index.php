@@ -19,8 +19,10 @@ include __DIR__ . '/partials/functions.php';
         <h1 class="text-primary">Strong Password Generator</h1>
         <h2 class="text-primary-emphasis mb-3">Genera una password sicura</h2>
         <?php
+            session_start();
             if(isset($_GET['pswLength']) && !empty($_GET['pswLength'])){
-                echo "<p>" . "La tua nuova password è: " . generateNewPassword($_GET['pswLength']) . "</p>";
+                $_SESSION['newRandomPassword'] = generateNewPassword($_GET['pswLength']);
+                header('Location: password.php');
             } else {
                 echo '<p>Inserisci un numero da 1 a 16 per decidere la lunghezza della password da generare</p>';
             }
@@ -28,7 +30,7 @@ include __DIR__ . '/partials/functions.php';
         <form class="mb-3 border border-black rounded-3 bg-light p-3" action="index.php">
             <label for="pswLength" class="form-label">Lunghezza password:</label>
             <input type="number" min="1" max="16" class="form-control d-inline-block w-auto" id="pswLength" name="pswLength" required>
-            <button type="submit" class="btn btn-primary d-block m-auto mt-5">Genera Password</button>
+            <button type="submit" href="" class="btn btn-primary d-block m-auto mt-5">Genera Password</button>
         </form>
     </main>
 </body>
