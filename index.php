@@ -25,7 +25,7 @@ include __DIR__ . '/partials/functions.php';
                 echo '<p>Inserisci un numero da 1 a 16 per decidere la lunghezza della password da generare</p>';
             }
         ?>
-        <form class="mb-3 border border-black rounded-3 bg-light p-3" active="index.php">
+        <form class="mb-3 border border-black rounded-3 bg-light p-3" action="index.php">
             <label for="pswLength" class="form-label">Lunghezza password:</label>
             <input type="number" min="1" max="16" class="form-control d-inline-block w-auto" id="pswLength" name="pswLength" required>
             <button type="submit" class="btn btn-primary d-block m-auto mt-5">Genera Password</button>
