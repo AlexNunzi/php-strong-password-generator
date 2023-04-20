@@ -27,6 +27,7 @@ include __DIR__ . '/partials/functions.php';
                 $specialCharCheck = (isset($_GET['specialCharCheck']) && !empty($_GET['specialCharCheck']));
                 if($charactersCheck || $numbersCheck || $specialCharCheck){
                     $_SESSION['newRandomPassword'] = generateNewPassword($_GET['pswLength'], $uniqueCheck, $charactersCheck, $numbersCheck, $specialCharCheck);
+                    $_SESSION['tooLong'] = (($_GET['pswLength'] > 10) && $numbersCheck && $uniqueCheck && !$charactersCheck && !$specialCharCheck);
                     header('Location: password.php');
                 }
                 else{
@@ -39,23 +40,23 @@ include __DIR__ . '/partials/functions.php';
         <form class="mb-3 border border-black rounded-3 bg-light p-3" action="index.php">
             <div>
                 <label for="pswLength" class="form-label mb-4">Lunghezza password:</label>
-                <input type="number" min="1" max="16" class="form-control d-inline-block w-auto" id="pswLength" name="pswLength" required>
+                <input type="number" min="1" max="16" class="form-control d-inline-block w-auto" id="pswLength" name="pswLength" <?php echo isset($_GET['pswLength']) ? "value='" . $_GET['pswLength']. "'":""; ?> required>
             </div>
             <div>
                 <label class="form-check-label mb-4" for="uniqueCheck">Solo caratteri non ripetuti</label>
-                <input type="checkbox" class="form-check-input" id="uniqueCheck" name="uniqueCheck" value="unique">
+                <input type="checkbox" class="form-check-input" id="uniqueCheck" name="uniqueCheck" value="unique" <?php echo isset($_GET['uniqueCheck']) ? "checked":""; ?>>
             </div>
             <div>
                 <label class="form-check-label mb-4" for="charactersCheck">Lettere</label>
-                <input type="checkbox" class="form-check-input" id="charactersCheck" name="charactersCheck" value="characters">
+                <input type="checkbox" class="form-check-input" id="charactersCheck" name="charactersCheck" value="characters" <?php echo isset($_GET['charactersCheck']) ? "checked":""; ?>>
             </div>
             <div>
                 <label class="form-check-label mb-4" for="numbersCheck">Numeri</label>
-                <input type="checkbox" class="form-check-input" id="numbersCheck" name="numbersCheck" value="numbers">
+                <input type="checkbox" class="form-check-input" id="numbersCheck" name="numbersCheck" value="numbers" <?php echo isset($_GET['numbersCheck']) ? "checked":""; ?>>
             </div>
             <div>
                 <label class="form-check-label mb-4" for="specialCharCheck">Simboli</label>
-                <input type="checkbox" class="form-check-input" id="specialCharCheck" name="specialCharCheck" value="special">
+                <input type="checkbox" class="form-check-input" id="specialCharCheck" name="specialCharCheck" value="special" <?php echo isset($_GET['specialCharCheck']) ? "checked":""; ?>>
             </div>
             <button type="submit" href="" class="btn btn-primary d-block m-auto mt-5">Genera Password</button>
         </form>

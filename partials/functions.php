@@ -19,7 +19,9 @@ function generateNewPassword($length, $unique, $characters, $numbersCheck, $spec
     while(count($newPassword) < $length){
         $newChar = $filter[rand(0, (count($filter) - 1))];
         if($unique){
-            if(!in_array($newChar, $newPassword)){
+            if(!in_array($newChar, $newPassword) && count($newPassword) < count($filter)){
+                $newPassword[] = $newChar;
+            } else if(count($newPassword) >= count($filter)){
                 $newPassword[] = $newChar;
             }
         } else {
